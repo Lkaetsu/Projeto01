@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Curso;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home',[
+    $cursos => Curso::all()
+    ]);
 });
+
+Route::get('cursos/{curso}', function ($id) {
+    return view('curso',[
+    $curso => Curso::findOrFail($id)
+    ]);
+});
+
+
 
 Route::get('/Area-Admin', function () {
     return view('A_adm');
