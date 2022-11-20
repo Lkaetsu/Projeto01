@@ -16,17 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home',[
-    $cursos => Curso::all()
+    'cursos' => Curso::all()
     ]);
 });
 
-Route::get('cursos/{curso}', function ($id) {
+Route::get('/home/{curso}', function ($id) {
     return view('curso',[
-    $curso => Curso::findOrFail($id)
+    'curso' => Curso::findOrFail($id)
     ]);
 });
-
-
 
 Route::get('/Area-Admin', function () {
     return view('A_adm');

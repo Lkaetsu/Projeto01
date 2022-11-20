@@ -1,11 +1,25 @@
-header{
-    background: blue;
-    color: white;
+h1{
+    background-color: rgb(0, 0, 160);
+    color: rgb(255, 221, 0);
+    padding: 1rem;
 }
-body{
+
+a{
+    color: rgb(0, 0, 160);
+    text-decoration: none;
+}
+
+.art-title{
+    background-color: white;
+    color: rgb(0, 0, 160);
+    max-width: 500px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.art-form{
     background: white;
     color: black;
-    max-width: 600px;
-    margin-left: auto;
+    padding-left: 1rem;
     font-family: sans-serif;
 }

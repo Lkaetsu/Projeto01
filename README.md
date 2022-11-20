@@ -43,6 +43,12 @@ php artisan key:generate
 ```
 
 
+Migrar as tabelas mysql
+```sh
+php artisan migrate
+```
+
+
 Acesse o projeto
 [http://localhost:8080](http://localhost:8080)
 
