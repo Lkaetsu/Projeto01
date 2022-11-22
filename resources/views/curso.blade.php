@@ -1,10 +1,5 @@
-@extends('layout')
+@extends('components.layout')
 
-@section('banner')
-<nav class="nav justify-content-start navbar-light bg-light">
-    <a class="nav-link active" href="/" aria-current="page"><h1>$School_Logo$</h1><span class="visually-hidden">(current)</span></a>
-</nav>
-@endsection
 @section('content')
     <article>
         <div class="art-title">
@@ -14,9 +9,15 @@
                 <p>{!! $curso->desc !!}</p>
                 <br>
                 <div>
-                    Número Minimo de alunos: {!! $curso->num_min !!}
+                    @if ( $curso->professor_id==0 )
+                        Sem atribuição de professor até o momento!
+                    @else
+                        Curso Ministrado por: <a href="professors/{{ $curso->professor->name }}">{{ $curso->professor->name }}</a>
+                    @endif
                     <br>
-                    Número Máximo de alunos: {!! $curso->num_max !!}
+                    Número Mínimo de alunos: {{ $curso->num_min }}
+                    <br>
+                    Número Máximo de alunos: {{ $curso->num_max }}
                     <br>
                     @if ( $curso->closed===true )
                         Matrículas Encerradas

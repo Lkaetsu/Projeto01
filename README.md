@@ -48,6 +48,11 @@ Migrar as tabelas mysql
 php artisan migrate
 ```
 
+Para o intuito de testes usar
+```sh
+php artisan migrate --seed
+```
+
 
 Acesse o projeto
 [http://localhost:8080](http://localhost:8080)

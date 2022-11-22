@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Curso;
+use App\Models\Professor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home',[
-    'cursos' => Curso::all()
+    return view('cursos',[
+    'cursos' => Curso::with('professor')->get()
     ]);
 });
 
-Route::get('/home/{curso}', function ($id) {
+Route::get('/{curso}', function (Curso $curso) {
     return view('curso',[
-    'curso' => Curso::findOrFail($id)
+    'curso' => $curso
     ]);
+});
+
+Route::get('professors/{professor:name}', function (Professor $professor) {
+    if($professor->curso!=null){
+    return view('cursos',[
+    'cursos'=>$professor->curso
+    ]);}
 });
 
 Route::get('/Area-Admin', function () {

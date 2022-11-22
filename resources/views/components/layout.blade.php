@@ -16,7 +16,9 @@
 
 
 <body>
-  @yield('banner')
+    <nav class="nav justify-content-start navbar-light bg-light">
+        <a class="nav-link active" href="/" aria-current="page"><h1>$School_Logo$</h1><span class="visually-hidden">(current)</span></a>
+    </nav>
   @yield('content')
 </body>
 

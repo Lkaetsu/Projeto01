@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function curso()
+    {
+        return $this->belongstomany(Curso::class);
+    }
+
+    public function professor()
+    {
+        return $this->hasone(Professor::class)->where('is_prof',true);
+    }
 }

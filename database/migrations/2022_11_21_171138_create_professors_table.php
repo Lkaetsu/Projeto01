@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cursos', function (Blueprint $table) {
+        Schema::create('professors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('desc');
-            $table->text('desc_simpl');
-            $table->foreignId('professor_id')->default(0);
-            $table->string('num_max');
-            $table->string('num_min');
-            $table->boolean('min_not_ach')->default(false);
-            $table->boolean('closed')->default(false);
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cursos');
+        Schema::dropIfExists('professors');
     }
 };

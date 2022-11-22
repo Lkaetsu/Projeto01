@@ -12,7 +12,6 @@ a{
 .art-title{
     background-color: white;
     color: rgb(0, 0, 160);
-    max-width: 500px;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -23,3 +22,4 @@ a{
     padding-left: 1rem;
     font-family: sans-serif;
 }
+
