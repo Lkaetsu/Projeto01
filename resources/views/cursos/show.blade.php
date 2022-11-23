@@ -12,7 +12,7 @@
                     @if ( $curso->professor_id==0 )
                         Sem atribuição de professor até o momento!
                     @else
-                        Curso Ministrado por: <a href="professors/{{ $curso->professor->name }}">{{ $curso->professor->name }}</a>
+                        Curso Ministrado por: <a href="/?professor={{ $curso->professor->name }}#">{{ $curso->professor->name }}</a>
                     @endif
                     <br>
                     Número Mínimo de alunos: {{ $curso->num_min }}
@@ -27,7 +27,7 @@
                         @else
                             Matrículas Abertas - Mínimo de alunos não atingido!
                         @endif
-                        <a class="btn btn-primary" href="/">Matricule-se</a>
+                        <a class="btn btn-primary" href="/register">Matricule-se</a>
                     @endif
                 </div>
             </div>

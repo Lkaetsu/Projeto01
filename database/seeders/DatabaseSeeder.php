@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'is_sec' => true
         ]);
         \App\Models\User::factory(10)->create();
-        \App\Models\Professor::factory(5)->create();
-        \App\Models\Curso::factory(5)->create();
+        //\App\Models\Professor::factory(5)->create();
+        \App\Models\Curso::factory(10)->create();
     }
 }

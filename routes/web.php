@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Curso;
 use App\Models\Professor;
 use Illuminate\Support\Facades\Route;
@@ -15,24 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('cursos',[
-    'cursos' => Curso::with('professor')->get()
-    ]);
-});
+Route::get('/', [CursoController::class,'index']);
+Route::get('/curso/{curso}', [CursoController::class,'show']);
 
-Route::get('/{curso}', function (Curso $curso) {
-    return view('curso',[
-    'curso' => $curso
-    ]);
-});
-
-Route::get('professors/{professor:name}', function (Professor $professor) {
-    if($professor->curso!=null){
-    return view('cursos',[
-    'cursos'=>$professor->curso
-    ]);}
-});
+Route::get('/register', [RegisterController::class,'create']);
+Route::post('/register', [RegisterController::class,'store']);
 
 Route::get('/Area-Admin', function () {
     return view('A_adm');

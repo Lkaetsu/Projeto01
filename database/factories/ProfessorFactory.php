@@ -20,7 +20,7 @@ class ProfessorFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'desc' => $this->faker->paragraph,
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->create([ 'is_prof' => true ]),
         ];
     }
 }

@@ -23,3 +23,12 @@ a{
     font-family: sans-serif;
 }
 
+div.inner {
+    width: 25%;
+    margin: 0 auto;
+  }
+
+.error{
+    text-size-adjust: 40%;
+    color: rgb(188, 188, 188);
+}

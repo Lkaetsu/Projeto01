@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('name');
-            $table->string('email')->unique();
+            //$table->string('email')->unique();
+            $table->string('cpf')->unique();
+            $table->string('endereço');
+            $table->string('filme')->default(null);
             $table->string('password');
             $table->boolean('is_adm')->default(false);
             $table->boolean('is_sec')->default(false);
