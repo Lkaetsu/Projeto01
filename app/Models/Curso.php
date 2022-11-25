@@ -30,6 +30,6 @@ class Curso extends Model
 
     public function user()
     {
-        return $this->hasmany(User::class);
+        return $this->belongstomany(User::class);
     }
 }

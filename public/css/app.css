@@ -24,11 +24,32 @@ a{
 }
 
 div.inner {
-    width: 25%;
+    display: flex;
     margin: 0 auto;
+    justify-content: center;
+    text-align: right;
   }
 
 .error{
-    text-size-adjust: 40%;
-    color: rgb(188, 188, 188);
+    font-size: x-small;
+    color: rgb(255, 0, 0);
+}
+
+.alert{
+    font-size: small;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.pagination{
+    margin-right: 12rem;
+    margin-left: 1rem;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    color: rgb(0, 0, 160);
 }

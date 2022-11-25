@@ -12,17 +12,21 @@ class RegisterController extends Controller
         return view('register.create');
     }
 
-    public function store(Request $request){
+    public function store(){
         $attributes=request()->validate([
             'name'=>'required|max:50',
-            'username'=>'required|max:50|unique:users',
-            'cpf'=>'required|numeric|max:11',
+            'username'=>'required|max:50|unique:users,username',
+            'cpf'=>'required|numeric|unique:users,cpf',
             'endereço'=>'required|max:60',
-            'filme'=>'nullable|max:40',
-            'password'=>'required',
+            'filme'=>'required|max:40',
+            'password'=>'required|min:6|max:20',
         ]);
-        User::create($attributes);
-        return redirect('/');
+
+        $user=User::create($attributes);
+
+        auth()->login($user);
+
+        return redirect('/')->with('sucesso','Sua conta foi criada');
         
     }
 }

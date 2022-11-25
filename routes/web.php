@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\User_CursoController;
 use App\Models\Curso;
 use App\Models\Professor;
 use Illuminate\Support\Facades\Route;
@@ -18,23 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CursoController::class,'index']);
-Route::get('/curso/{curso}', [CursoController::class,'show']);
+Route::get('curso/{curso}', [CursoController::class,'show']);
+Route::post('curso/{curso}', [User_CursoController::class,'add'])->name('add');
 
-Route::get('/register', [RegisterController::class,'create']);
-Route::post('/register', [RegisterController::class,'store']);
+Route::get('/register', [RegisterController::class,'create'])->middleware('guest');
+Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
 
-Route::get('/Area-Admin', function () {
-    return view('A_adm');
-});
+Route::get('/login',[SessionController::class,'create'])->middleware('guest');
+Route::post('/login',[SessionController::class,'store'])->middleware('guest');
+Route::post('/logout',[SessionController::class,'destroy'])->middleware('auth');
 
-Route::get('/Area-Secretaria', function () {
-    return view('A_sec');
-});
-
-Route::get('/Area-Professor', function () {
-    return view('A_prof');
-});
-
-Route::get('/Area-Aluno', function () {
-    return view('A_alu');
-});
+//Route::post('/add',[User_CursoController::class,'add'])->middleware('auth');

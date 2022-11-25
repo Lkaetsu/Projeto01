@@ -5,7 +5,7 @@
       <div class="col-sm-6">
         <div class="card">
           <h3 class="card-header">
-            <a href="/curso/{{ $curso->id }}">{{ $curso->name }}</a>
+            <a href="curso/{{ $curso->id }}">{{ $curso->name }}</a>
           </h3>
           <div class="card-body">
             <p class="card-text">{{ $curso->desc_simpl }}</p>
@@ -20,9 +20,10 @@
     @endforeach
   </div>
   <br>
-  {{ $cursos->links() }}
+  <div class="pagination">{{ $cursos->links() }}
 @else
   <p class="text center">Sem cursos aplicáveis registrados por enquanto. Volte mais tarde.</p>
 @endif
   @yield('curso-card')
+  </div>
 </body>
