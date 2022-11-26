@@ -10,6 +10,9 @@
           <input type="text" name="search" placeholder="Buscar"
                   class="bg-transparent placeholder-gray font-semibold text-sm"
                   value="{{ request('search') }}">
+            @auth
+            <a href="/?user={{ $user->id }}#"><h5>Meus Cursos: </h5></a>
+            @endauth
         </form>
       </div>
   </div>

@@ -22,6 +22,7 @@
                         @enderror
                     </small>
                 </div>
+                <br>
                 <div class="flex mb-6">
                     <label for="password">Senha: </label>
                     <input type="password"

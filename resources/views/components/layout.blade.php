@@ -24,6 +24,7 @@
             <form action="/logout" method="post">
               @csrf
               <div class="nav-links">
+                <a class="nav-link active" href="/update" aria-current="page"><h6>Alterar Dados</h6></a>
                 <button type="submit"><h6>Logout</h6></button>
               </div>
             </form>

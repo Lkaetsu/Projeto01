@@ -15,10 +15,18 @@ class Curso extends Model
                 ->where('name','like','%'.$search.'%')
                 ->orwhere('desc','like','%'.$search.'%')
                 ->orwhere('desc_simpl','like','%'.$search.'%')
-        );
+                //->orwhere($filters['search'] ?? false,fn($query,$search)=>$query
+                //        ->from('professors')->wherecolumn('professors.id','professor-id')
+                //        ->orwhere('professors.name','like','%'.$search.'%')->dd()
+                );
         $query->when($filters['professor'] ?? false, fn($query,$professor)=>
             $query->wherehas('professor', fn($query)=>
                 $query->where('name', $professor)
+            )
+        );
+        $query->when($filters['user'] ?? false, fn($query,$user)=>
+            $query->wherehas('user', fn($query)=>
+                $query->where('user_id', $user)
             )
         );
     }
@@ -30,6 +38,6 @@ class Curso extends Model
 
     public function user()
     {
-        return $this->belongstomany(User::class);
+        return $this->belongstomany(User::class,'curso_users');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CursoUser;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,9 +43,15 @@ class User extends Authenticatable
         $this->attributes['password']=bcrypt($password);
     }
 
+    public static function hasCurso($curso,$user){
+        return $user->curso()
+        ->where('curso_id',$curso->id)
+        ->exists();
+    }
+
     public function curso()
     {
-        return $this->belongstomany(Curso::class);
+        return $this->belongstomany(Curso::class,'curso_users');
     }
 
     public function professor()
