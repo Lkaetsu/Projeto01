@@ -48,7 +48,7 @@ Migrar as tabelas mysql
 php artisan migrate
 ```
 
-Para o intuito de testes usar
+Ou para o intuito de testes usar
 ```sh
 php artisan migrate --seed
 ```
