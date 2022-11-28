@@ -19,10 +19,19 @@ class UserController extends Controller
                 ->delete();
             return back()->with('sucesso', 'Desmatriculado com sucesso.');
         }
-        CursoUser::create([
-            'user_id'=>$user->id,
-            'curso_id'=>$curso_id,
-        ]);
+        else{
+            $cursouser = CursoUser::create([
+                'user_id'=>$user->id,
+                'curso_id'=>$curso_id,
+            ]);
+            if(CursoUser::where('curso_id','=',$curso_id)->count()>=$curso->num_min){
+                Curso::where('id','=',$curso_id)->where('min_not_ach','=',false)->update(['min_not_ach'=>true]);
+            }
+            if(CursoUser::where('curso_id','=',$curso_id)->count()==$curso->num_max){
+                Curso::where('id','=',$curso_id)->where('closed','=',false)->update(['closed'=>true]);
+            }
+
+        }
         return back()->with('sucesso', 'Matriculado com sucesso.');
     }
 

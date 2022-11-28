@@ -20,7 +20,7 @@ return new class extends Migration
             //$table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('endereço');
-            $table->string('filme')->default(null);
+            $table->string('filme')->nullable()->default(null);
             $table->string('password');
             $table->boolean('is_adm')->default(false);
             $table->boolean('is_sec')->default(false);

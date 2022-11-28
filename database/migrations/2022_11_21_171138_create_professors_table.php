@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('professors', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('desc');
-            $table->foreignId('user_id')->default(null);
+            $table->foreignId('user_id')->default(null)->onDelete('cascade');
             $table->timestamps();
         });
     }

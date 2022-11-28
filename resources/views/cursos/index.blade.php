@@ -11,7 +11,11 @@
                   class="bg-transparent placeholder-gray font-semibold text-sm"
                   value="{{ request('search') }}">
             @auth
-            <a href="/?user={{ $user->id }}#"><h5>Meus Cursos: </h5></a>
+              @if($user->is_prof)
+              <a href="/?professor={{ $professor->name }}#"><h5>Meus Cursos: </h5></a>
+              @else
+              <a href="/?user={{ $user->id }}#"><h5>Meus Cursos: </h5></a>
+              @endif
             @endauth
         </form>
       </div>

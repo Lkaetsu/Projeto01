@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('curso_users',function (Blueprint $table){
-            $table->foreignId('user_id')->onDelete('cascade');
-            $table->foreignId('curso_id')->onDelete('cascade');
-            $table->string('Nota')->default(0);
+        Schema::create('professor_cursos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignid('Professor_id');
+            $table->foreignid('Curso_id');
             $table->timestamps();
-    });
+        });
     }
 
     /**
@@ -28,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        {
-            Schema::dropIfExists('curso_users');
-        }
+        Schema::dropIfExists('professor_cursos');
     }
 };

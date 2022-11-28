@@ -15,6 +15,7 @@ class CursoController extends Controller
         'cursos' => Curso::latest()->filter(request(['search', 'professor','user']))
         ->paginate(6)->withQueryString(),
         'user' => auth()->user(),
+        'professor' => auth()->user(),
         ]);
     }
 
@@ -22,16 +23,24 @@ class CursoController extends Controller
     if(auth()->check()){
         $user=auth()->user();
         $hasCurso=User::hasCurso($curso,$user);
-        $curso_user=CursoUser::where($user->id='user_id')->where($curso->id='curso_id');
+        $nota=CursoUser::where('user_id','=',$user->id)->where('curso_id','=',$curso->id)->pluck('nota');
         return view('cursos.show',[
             'curso' => $curso,
             'user' => $user,
-            'hasCurso'=>$hasCurso,
-            'curso_user'=>$curso_user
+            'hasCurso' => $hasCurso,
+            'nota' => $nota,
             ]);
     }
     return view('cursos.show',[
         'curso' => $curso
         ]);
+    }
+
+    public function close(Request $request,$curso_id){
+        $closed = $request->input('close');
+
+        Curso::where('id','=',$curso_id)->update(['closed'=>$closed]);
+
+        return back();
     }
 }

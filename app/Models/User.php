@@ -44,17 +44,17 @@ class User extends Authenticatable
     }
 
     public static function hasCurso($curso,$user){
-        return $user->curso()
+        return $user->cursos()
         ->where('curso_id',$curso->id)
         ->exists();
     }
 
-    public function curso()
+    public function cursos()
     {
         return $this->belongstomany(Curso::class,'curso_users');
     }
 
-    public function professor()
+    public function isprof()
     {
         return $this->hasone(Professor::class)->where('is_prof',true);
     }

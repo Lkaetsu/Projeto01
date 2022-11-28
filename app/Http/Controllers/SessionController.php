@@ -17,7 +17,7 @@ class SessionController extends Controller
         ]);
         if(auth()->attempt($attributes)){
             session()->regenerate();
-            return redirect('/')->with('success','Usuário logado.');
+            return redirect('/')->with('sucesso','Usuário logado.');
         }
         
         throw ValidationException::withMessages([
@@ -28,6 +28,6 @@ class SessionController extends Controller
 
     public function destroy(){
         auth()->logout();
-        return redirect('/')->with('success','Usuário deslogado.');
+        return redirect('/')->with('sucesso','Usuário deslogado.');
     }
 }

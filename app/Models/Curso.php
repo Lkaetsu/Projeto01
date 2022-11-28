@@ -9,6 +9,8 @@ class Curso extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
+
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, fn($query,$search)=>
             $query
@@ -31,12 +33,13 @@ class Curso extends Model
         );
     }
 
+
     public function professor()
     {
         return $this->belongsto(Professor::class);
     }
 
-    public function user()
+    public function users()
     {
         return $this->belongstomany(User::class,'curso_users');
     }

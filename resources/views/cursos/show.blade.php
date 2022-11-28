@@ -29,18 +29,41 @@
                             Matrículas Abertas - Mínimo de alunos não atingido!
                         @endif
                         @auth
-                            @if ( $hasCurso==true )
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Confirmação">Desmatricule-se</button>
-                            @elseif ($curso->closed==false)
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Confirmação">Matricule-se</button>
+                            @if ($user->is_sec==true)
+                                <br>
+                                @if ($curso->closed==false)
+                                    <form action="{{ route('close',['curso'=>$curso]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="close" value="1">
+                                    <button type="submit">Fechar a Matrícula</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('close',['curso'=>$curso]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="close" value="0">
+                                    <button type="submit">Reabrir a Matrícula</button>
+                                    </form>
+                                @endif
                             @endif
-                            @section('modal-confirm')
-                            @endsection
-                            @if ( $hasCurso==true )
-                            <br>
-                            Nota: {{ $curso_user->nota }}
+                            @if($user->is_prof==true && $user->id==$curso->professor->id)
+                                <br>
+                                <a class="btn btn-primary" href="/{{$curso->id}}/alunos">Alunos</a>
+                            @elseif($user->is_sec==false)
+                                @if ( $hasCurso==true )
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Confirmação">Desmatricule-se</button>
+                                    @section('modal-confirm')
+                                    @endsection
+                                @elseif ($curso->closed==false)
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Confirmação">Matricule-se</button>
+                                    @section('modal-confirm')
+                                    @endsection
+                                @endif
+                                @if ( $hasCurso==true )
+                                    <br>
+                                    Nota: {{ $nota }}
+                                @endif
                             @endif
-                        @else
+                        @elseif ($curso->closed==false)
                             <a class="btn btn-primary" href="/register">Matricule-se</a>
                         @endauth
                     @endif

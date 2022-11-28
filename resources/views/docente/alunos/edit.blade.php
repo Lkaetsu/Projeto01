@@ -3,18 +3,19 @@
 @section('content')
     <br>
     <main class="max-w-lg mx-auto">
-        <h1 class="text-center">Altere seus dados</h1>
+        <h1 class="text-center">Altere os dados deste aluno</h1>
         <br>
         <div class="inner">
-            <form method="POST" action="/update">
+            <form method="POST" action="{{ route('update.aluno',['user'=>$user]) }}">
                 @csrf
+                @method('PATCH')
                 <div class="mb-6">
                     <label for="name">Nome Completo</label>
                     <input type="text"
                         class="border border-gray-400 p-2 w-full"
                         name="name" 
                         id="name"
-                        value="{{ $user->name }}"
+                        value="{{ user->name }}"
                         required>
                         <small id="name" class="form-text text-muted">
                             @error('name')
@@ -67,8 +68,7 @@
                     @enderror
                     </small>
                 </div>
-                @if(!$user->is_prof)
-                    <br>
+                <br>
                     <div class="mb-6">
                         <label for="filme">Filme de Preferência</label>
                         <input type="text"
@@ -83,7 +83,6 @@
                         @enderror
                         </small>
                     </div>
-                @endif
                 <br>
                 <div class="mb-6">
                     <label for="password">Senha</label>
@@ -99,7 +98,7 @@
                     </small>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
             </form>
         </div>
     </main>

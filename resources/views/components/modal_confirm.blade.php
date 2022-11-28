@@ -7,7 +7,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                <form action="{{ route('UserCont',['curso'=>$curso]) }}" method="post">
+                <form action="{{ route('add',['curso'=>$curso]) }}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-primary">Sim</button>
                 <input name="confirm" type="hidden" value="{{$curso->id}}" />

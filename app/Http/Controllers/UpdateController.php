@@ -20,7 +20,7 @@ class UpdateController extends Controller
                 'username'=>'required|max:20|unique:users,username,'.$id,
                 'cpf'=>'required|numeric|unique:users,cpf,'.$id,
                 'endereço'=>'required|max:60',
-                'filme'=>'required|max:40',
+                'filme'=>'nullable|max:40',
                 'password'=>'required|'
             ]);
 

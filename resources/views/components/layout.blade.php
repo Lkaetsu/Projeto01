@@ -10,9 +10,8 @@
   <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-
 </head>
 
 
@@ -20,18 +19,45 @@
     <nav class="nav justify-content-space-between navbar-light bg-light">
         <a class="nav-link active" href="/" aria-current="page"><h1>$School_Logo$</h1><span class="visually-hidden">(current)</span></a>
         <div class="navbar nav">
-          @auth
-            <form action="/logout" method="post">
-              @csrf
-              <div class="nav-links">
-                <a class="nav-link active" href="/update" aria-current="page"><h6>Alterar Dados</h6></a>
-                <button type="submit"><h6>Logout</h6></button>
+          <div class="nav-links">
+            @auth
+              <a class="nav-link active" href="/update" aria-current="page"><h6>Alterar Dados</h6></a>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="triggercurso" data-bs-toggle="dropdown" aria-haspopup="true" 
+                aria-expanded="false"><h6>Cursos</h6></button>
+                <div class="dropdown-menu" aria-labelledby="triggercurso">
+                  <a class="dropdown-item" href="/docente/cursos/">Gerenciamento dos cursos</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/docente/cursos/create">Registrar novo curso</a>
+                </div>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="triggerprofessor" data-bs-toggle="dropdown" aria-haspopup="true" 
+              aria-expanded="false"><h6>Professores</h6></button>
+              <div class="dropdown-menu" aria-labelledby="triggerprofessor">
+                <a class="dropdown-item" href="/docente/professors/">Gerenciamento dos professores</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/docente/professors/register">Registrar novo professor</a>
               </div>
-            </form>
-          @else
-            <div class="nav-links"><a class="nav-link active" href="/register" aria-current="page"><h6>Register</h6></a></div>
-            <div class="nav-links"><a class="nav-link active" href="/login" aria-current="page"><h6>Login</h6></a></div>
-          @endauth
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="triggeraluno" data-bs-toggle="dropdown" aria-haspopup="true" 
+            aria-expanded="false"><h6>Alunos</h6></button>
+            <div class="dropdown-menu" aria-labelledby="triggeraluno">
+              <a class="dropdown-item" href="/docente/alunos/index">Gerenciamento dos alunos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/docente/alunos/register">Registrar novo aluno</a>
+            </div>
+        </div>
+              <form action="/logout" method="post">
+                @csrf
+                  <button class="btn btn-primary type="submit"><h6>Logout</h6></button>
+              </form>
+            @else
+              <a class="nav-link active" href="/register" aria-current="page"><h6>Register</h6></a>
+              <a class="nav-link active" href="/login" aria-current="page"><h6>Login</h6></a>
+            @endauth
+          </div>
         </div>
     </nav>
   @if (session()->has('sucesso'))

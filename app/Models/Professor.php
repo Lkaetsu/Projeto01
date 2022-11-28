@@ -9,12 +9,14 @@ class Professor extends Model
 {
     use HasFactory;
 
+    protected $guarded=[];
+
     public function curso()
     {
-        return $this->hasMany(Curso::class);
+        return $this->hasmany(Curso::class);
     }
     public function user()
     {
-        return $this->belongto(User::class);
+        return $this->belongsto(User::class);
     }
 }

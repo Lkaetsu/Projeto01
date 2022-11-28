@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cursos', function (Blueprint $table) {
-            $table->id()->startingValue(1);
+            $table->id();
             $table->string('name');
             $table->text('desc');
             $table->text('desc_simpl');
-            $table->foreignId('professor_id')->default(0);
+            $table->foreignId('professor_id')->nullable()->onDelete('cascade');
             $table->string('num_max');
             $table->string('num_min');
             $table->boolean('min_not_ach')->default(false);

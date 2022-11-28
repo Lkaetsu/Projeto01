@@ -28,6 +28,9 @@ div.inner {
     margin: 0 auto;
     justify-content: center;
     text-align: right;
+    border: gray;
+    border-radius: 25px;
+    padding: 2rem;
   }
 
 .error{
@@ -52,4 +55,9 @@ div.inner {
     justify-content: right;
     flex-direction: row;
     color: rgb(0, 0, 160);
+}
+
+a.table{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
 }

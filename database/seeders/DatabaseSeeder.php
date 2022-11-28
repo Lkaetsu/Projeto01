@@ -18,18 +18,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Teste Adm',
             'username' => 'TestAdm',
             'cpf' => '67890123456',
+            'password' => 'Password',
             'is_adm' => true
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Teste Sec',
             'username' => 'TestSec',
             'cpf' => '09876543210',
+            'password' => 'Password',
             'is_sec' => true
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Teste Prof',
             'username' => 'TestProf',
             'cpf' => '65432109876',
+            'password' => 'Password',
             'is_prof' => true
         ]);
         \App\Models\User::factory()->create([
@@ -40,7 +43,11 @@ class DatabaseSeeder extends Seeder
             'filme' => 'asd',
             'password' => 'Password'
         ]);
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create([
+            'is_prof' => false,
+            'is_sec' => false,
+            'is_adm' => false,
+        ]);
         //\App\Models\Professor::factory(5)->create();
         \App\Models\Curso::factory(10)->create();
     }
