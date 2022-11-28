@@ -1,0 +1,63 @@
+h1{
+    background-color: rgb(0, 0, 160);
+    color: rgb(255, 221, 0);
+    padding: 1rem;
+}
+
+a{
+    color: rgb(0, 0, 160);
+    text-decoration: none;
+}
+
+.art-title{
+    background-color: white;
+    color: rgb(0, 0, 160);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.art-form{
+    background: white;
+    color: black;
+    padding-left: 1rem;
+    font-family: sans-serif;
+}
+
+div.inner {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: right;
+    border: gray;
+    border-radius: 25px;
+    padding: 2rem;
+  }
+
+.error{
+    font-size: x-small;
+    color: rgb(255, 0, 0);
+}
+
+.alert{
+    font-size: small;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.pagination{
+    margin-right: 12rem;
+    margin-left: 1rem;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    color: rgb(0, 0, 160);
+}
+
+a.table{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}

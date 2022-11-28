@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CursoUser;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,12 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
+    protected $guarded=[];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -38,7 +34,28 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    //protected $casts = [
+    //    'email_verified_at' => 'datetime',
+    //];
+
+    public function setpasswordattribute($password)
+    {
+        $this->attributes['password']=bcrypt($password);
+    }
+
+    public static function hasCurso($curso,$user){
+        return $user->cursos()
+        ->where('curso_id',$curso->id)
+        ->exists();
+    }
+
+    public function cursos()
+    {
+        return $this->belongstomany(Curso::class,'curso_users');
+    }
+
+    public function isprof()
+    {
+        return $this->hasone(Professor::class)->where('is_prof',true);
+    }
 }
