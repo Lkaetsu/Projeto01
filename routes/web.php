@@ -6,7 +6,6 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlunosController;
-use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\DocenteCursoController;
 use App\Http\Controllers\DocenteProfessorController;
 use App\Http\Controllers\DocenteAlunoController;
@@ -65,6 +64,8 @@ Route::post('/docente/professors/',[DocenteProfessorController::class,'store'])-
 Route::get('/docente/professors/register',[DocenteProfessorController::class,'register'])->middleware('sec');
 
 Route::get('/docente/professors/',[DocenteProfessorController::class,'index'])->middleware('sec');
-Route::get('/docente/professors/{professor}/edit',[DocenteProfessorController::class,'edit'])->middleware('sec');
-Route::patch('/docente/professors/{professor}',[DocenteProfessorController::class,'update'])->name('update.professor')->middleware('sec');
-Route::delete('/docente/professors/{professor}',[DocenteProfessorController::class,'destroy'])->middleware('sec');
+Route::get('/docente/professors/{user}/edit',[DocenteProfessorController::class,'edit'])->middleware('sec');
+Route::get('/docente/professors/{user}/assign',[DocenteProfessorController::class,'assign'])->middleware('sec');
+Route::patch('/docente/professors/{user}',[DocenteProfessorController::class,'update'])->name('update.professor')->middleware('sec');
+Route::post('/docente/professors/{user}/assign',[DocenteProfessorController::class,'storeassign'])->name('assign.professor')->middleware('sec');
+Route::delete('/docente/professors/{user}',[DocenteProfessorController::class,'destroy'])->middleware('sec');

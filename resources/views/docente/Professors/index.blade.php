@@ -16,11 +16,14 @@
                     @foreach ($professors as $professor)
                         <tr class="">
                             <td scope="row">{{ $professor->name }}</td>
+                            <td>
                             @foreach ($cursos as $curso)
-                                @if ($professor->user_id==$curso->professor_id)
-                                    <td>{{ $professor->curso->name }}</td>
+                                @if ($professor->id==$curso->professor_id)
+                                    {{ $curso->name }}
                                 @endif
                             @endforeach
+                            </td>
+                            <td><a class="btn btn-secondary" href="/docente/professors/{{ $professor->id }}/assign">Atribuir a um curso</a></td>
                             <td><a class="btn btn-secondary" href="/docente/professors/{{ $professor->id }}/edit">Editar</a></td>
                             <form action="/docente/professors/{{ $professor->id }}" method="post">
                                 @csrf

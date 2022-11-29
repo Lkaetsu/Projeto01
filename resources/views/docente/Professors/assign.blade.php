@@ -3,10 +3,10 @@
 @section('content')
     <br>
     <main class="max-w-lg mx-auto">
-        <h1 class="text-center">Atribua esse aluno a um curso</h1>
+        <h1 class="text-center">Atribua esse professor a um curso</h1>
         <br>
         <div class="inner">
-            <form method="POST" action="{{ route('assign.aluno',['user'=>$user]) }}">
+            <form method="POST" action="{{ route('assign.professor',['user'=>$user]) }}">
                 @csrf
                 <br>
                 <div class="mb-6">

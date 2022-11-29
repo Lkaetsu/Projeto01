@@ -54,8 +54,7 @@ class User extends Authenticatable
         return $this->belongstomany(Curso::class,'curso_users');
     }
 
-    public function isprof()
-    {
-        return $this->hasone(Professor::class)->where('is_prof',true);
+    public function professor_curso(){
+        return $this->hasmany(Curso::class)->where('users.is_prof',true);
     }
 }

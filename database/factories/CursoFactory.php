@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Professor;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Curso>
@@ -23,7 +23,11 @@ class CursoFactory extends Factory
             'desc' => $this->faker->paragraph,
             'num_min' =>$this->faker->randomDigitNotZero,
             'num_max' =>$this->faker->numberBetween($min=10, $max=50),
-            'professor_id' =>Professor::factory(),
+            'professor_id' =>User::factory()->create([
+                'is_adm' => false,
+                'is_sec' => false,
+                'is_prof' => true,
+            ]),
         ];
     }
 }
