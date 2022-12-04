@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function cursos()
     {
-        return $this->belongstomany(Curso::class,'curso_users');
+        return $this->belongstomany(Curso::class,'curso_users')->withPivot('nota');
     }
 
     public function professor_curso(){

@@ -45,7 +45,7 @@
                                     </form>
                                 @endif
                             @endif
-                            @if($user->is_prof==true && $user->id==$curso->professor->id)
+                            @if($user->is_prof==true && $user->id==$curso->professor_id || $user->is_sec==true)
                                 <br>
                                 <a class="btn btn-primary" href="/{{$curso->id}}/alunos">Alunos</a>
                             @elseif($user->is_sec==false)

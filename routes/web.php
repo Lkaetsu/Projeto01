@@ -39,8 +39,8 @@ Route::get('/login',[SessionController::class,'create'])->middleware('guest');
 Route::post('/login',[SessionController::class,'store'])->middleware('guest');
 Route::post('/logout',[SessionController::class,'destroy'])->middleware('auth');
 
-Route::get('/{curso}/alunos', [AlunosController::class,'show'])->middleware('prof');
-Route::post('/{curso}/alunos/{aluno}', [AlunosController::class,'assign'])->name('assign')->middleware('prof');
+Route::get('/{curso}/alunos', [AlunosController::class,'show']);
+Route::post('/{curso}/alunos', [AlunosController::class,'assign'])->name('assign')->middleware('prof');
 
 Route::post('/docente/alunos/',[DocenteAlunoController::class,'store'])->middleware('sec');
 Route::get('/docente/alunos/register',[DocenteAlunoController::class,'register'])->middleware('sec');
