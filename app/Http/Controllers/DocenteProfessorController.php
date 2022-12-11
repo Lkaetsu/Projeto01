@@ -10,7 +10,7 @@ class DocenteProfessorController extends Controller
 {
     public function index(){
         return view('docente.professors.index',[
-            'professors' => User::where('is_prof',true)->paginate(20),
+            'professors' => User::where('is_prof',true)->where('is_adm',false)->paginate(20),
             'cursos' => Curso::all()
         ]);
     }

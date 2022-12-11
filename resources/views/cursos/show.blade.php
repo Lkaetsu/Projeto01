@@ -20,6 +20,23 @@
                     <br>
                     Número Máximo de alunos: {{ $curso->num_max }}
                     <br>
+                    @if ($user->is_sec==true||$user->is_prof==true)
+                        @php
+                            $aprovados=App\Models\CursoUser::where('curso_id','=',$curso->id)->where('nota','>',5)->count();
+                            $media=App\Models\CursoUser::where('curso_id','=',$curso->id)->sum('nota');
+                            $count=App\Models\CursoUser::where('curso_id','=',$curso->id)->count();
+                        @endphp
+                        @if($count!=0)
+                            Média Geral do Curso: {{  $media/$count  }}
+                            <br>
+                            Alunos aprovados até o momento: {{ $aprovados }} - {{ $aprovados / $count * 100 }}%
+                            <br>
+                            Alunos reprovados até o momento: {{ $count-$aprovados }} - {{ ($count-$aprovados) / $count * 100 }}%
+                        @else
+                            Sem alunos até o momento
+                        @endif
+                        <br>
+                    @endif
                     @if ( $curso->closed==true )
                         Matrículas Encerradas
                     @else

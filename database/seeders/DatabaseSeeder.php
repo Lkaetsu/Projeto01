@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             'cpf' => '67890123456',
             'password' => 'Password',
             'is_adm' => true,
-            'is_sec' => false,
-            'is_prof' => false,
+            'is_sec' => true,
+            'is_prof' => true,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Teste Sec',

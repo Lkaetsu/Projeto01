@@ -11,10 +11,12 @@ class AlunosController extends Controller
 {
     public function show(Curso $curso){
         $users = User::all();
+        $alunos=NULL;
         foreach($users as $user){
             if(User::hasCurso($curso,$user))
                 $alunos = [$user,];
         }
+
         return view('cursos.alunos.show',[
             'curso' => $curso,
             'alunos' => $alunos,
