@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('curso_users',function (Blueprint $table){
-            $table->foreignId('user_id')->onDelete('cascade');
-            $table->foreignId('curso_id')->onDelete('cascade');
-            $table->string('Nota')->default(0);
+            $table->foreignId('user_id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('curso_id')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('Nota')->default(0);
             $table->timestamps();
     });
     }

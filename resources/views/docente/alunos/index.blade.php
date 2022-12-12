@@ -24,9 +24,9 @@
                                 <td scope="row">{{ $user->endereço }}</td>
                                 <td scope="row">{{ $user->filme }}</td>
                                 <td>
-                                    @foreach ($cursos as $curso)
-                                        @if ($user->id==$curso->user_id)
-                                            {{ $user->curso->name }}
+                                    @foreach ($curso_users as $curso_user)
+                                        @if ($user->id==$curso_user->user_id)
+                                            {{ $user->cursos->pluck('name')->implode('') }}
                                         @endif
                                     @endforeach
                                 </td>

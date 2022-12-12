@@ -20,6 +20,23 @@
                     <br>
                     Número Máximo de alunos: {{ $curso->num_max }}
                     <br>
+                    @if ($user->is_sec==true||$user->is_prof==true)
+                        @php
+                            $aprovados=App\Models\CursoUser::where('curso_id','=',$curso->id)->where('nota','>',5)->count();
+                            $media=App\Models\CursoUser::where('curso_id','=',$curso->id)->sum('nota');
+                            $count=App\Models\CursoUser::where('curso_id','=',$curso->id)->count();
+                        @endphp
+                        @if($count!=0)
+                            Média Geral do Curso: {{  $media/$count  }}
+                            <br>
+                            Alunos aprovados até o momento: {{ $aprovados }} - {{ $aprovados / $count * 100 }}%
+                            <br>
+                            Alunos reprovados até o momento: {{ $count-$aprovados }} - {{ ($count-$aprovados) / $count * 100 }}%
+                        @else
+                            Sem alunos até o momento
+                        @endif
+                        <br>
+                    @endif
                     @if ( $curso->closed==true )
                         Matrículas Encerradas
                     @else
@@ -45,7 +62,7 @@
                                     </form>
                                 @endif
                             @endif
-                            @if($user->is_prof==true && $user->id==$curso->professor->id)
+                            @if($user->is_prof==true && $user->id==$curso->professor_id || $user->is_sec==true)
                                 <br>
                                 <a class="btn btn-primary" href="/{{$curso->id}}/alunos">Alunos</a>
                             @elseif($user->is_sec==false)

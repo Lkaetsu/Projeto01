@@ -17,9 +17,6 @@ class Curso extends Model
                 ->where('name','like','%'.$search.'%')
                 ->orwhere('desc','like','%'.$search.'%')
                 ->orwhere('desc_simpl','like','%'.$search.'%')
-                //->orwhere($filters['search'] ?? false,fn($query,$search)=>$query
-                //        ->from('professors')->wherecolumn('professors.id','professor-id')
-                //        ->orwhere('professors.name','like','%'.$search.'%')->dd()
                 );
         $query->when($filters['professor'] ?? false, fn($query,$professor)=>
             $query->wherehas('professor', fn($query)=>
@@ -27,7 +24,7 @@ class Curso extends Model
             )
         );
         $query->when($filters['user'] ?? false, fn($query,$user)=>
-            $query->wherehas('user', fn($query)=>
+            $query->wherehas('users', fn($query)=>
                 $query->where('user_id', $user)
             )
         );
@@ -36,7 +33,7 @@ class Curso extends Model
 
     public function professor()
     {
-        return $this->belongsto(Professor::class);
+        return $this->belongsto(User::class)->where('is_prof',true);
     }
 
     public function users()

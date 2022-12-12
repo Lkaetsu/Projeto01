@@ -84,9 +84,9 @@
                 <br>
                 <div class="mb-6">
                     <label for="professor_id">Número máximo de alunos</label>
-                    <select name="professor_id" id="professor_id">
+                    <select name="professor_id" id="professor_id" value="{{ $curso->professor_id }}">
                         <option value="">Sem Professor</option>
-                        @foreach (\App\Models\Professor::all() as $professor)
+                        @foreach (\App\Models\User::all()->where('is_prof',true) as $professor)
                             <option value="{{ $professor->id }}">{{ $professor->name }}</option>
                         @endforeach
                     </select>

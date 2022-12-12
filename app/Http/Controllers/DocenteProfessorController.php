@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Professor;
 use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ class DocenteProfessorController extends Controller
 {
     public function index(){
         return view('docente.professors.index',[
-            'professors' => Professor::paginate(20),
+            'professors' => User::where('is_prof',true)->where('is_adm',false)->paginate(20),
             'cursos' => Curso::all()
         ]);
     }
@@ -29,22 +28,17 @@ class DocenteProfessorController extends Controller
             'password'=>'required|min:6|max:20',
         ]);
 
-        $user = User::create($attributes);
-        
-        Professor::create([
-            'name' => $user->name,
-            'user_id' => $user->id
-        ]);
+        $user = User::create([$attributes,'is_prof'=>true]);
 
         return redirect('/')->with('sucesso','Professor registrado.');
     }
 
-    public function edit(Professor $professor){
-        return view('docente.professors.edit',['professor'=>$professor]);
+    public function edit(User $user){
+        return view('docente.professors.edit',['user'=>$user]);
     }
 
-    public function update(Professor $professor){
-        $id=$professor->user->id;
+    public function update(User $user){
+        $id=$user->id;
         $attributes = request()->validate([
             'name'=>'required|max:50',
             'username'=>'required|max:20|unique:users,username,'.$id,
@@ -53,16 +47,33 @@ class DocenteProfessorController extends Controller
             'password'=>'required|min:6|max:20',
         ]);
 
-        $professor->user->update($attributes);
-        $professor->name=$professor->user->name;
+        $user->update([$attributes,'is_prof'=>true]);
 
         return back()->with('sucesso','Os dados do professor foram alterados com sucesso.');
     }
 
-    public function destroy(Professor $professor){
-        $professor->user->delete();
-        $professor->delete();
+    public function destroy(User $user){
+        $user->delete();
 
         return back()->with('sucesso','Registro do professor deletado.');
+    }
+
+    public function assign(User $user){
+        return view('docente.professors.assign',[
+            'user'=>$user,
+            'cursos'=>Curso::all()
+        ]);
+    }
+
+    public function storeassign(User $user){
+        $cursos_id = request()->validate([
+            'curso_id'=>'required|numeric',
+        ]);
+        foreach($cursos_id as $curso_id)
+            Curso::where('id','=',$curso_id)->update([
+                'professor_id'=>$user->id
+            ]);
+
+        return back()->with('sucesso','Curso atribuído ao professor.');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\CursoUser;
-use App\Models\Professor;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,6 @@ class CursoController extends Controller
         'cursos' => Curso::latest()->filter(request(['search', 'professor','user']))
         ->paginate(6)->withQueryString(),
         'user' => auth()->user(),
-        'professor' => auth()->user(),
         ]);
     }
 

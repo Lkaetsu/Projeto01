@@ -22,36 +22,38 @@
           <div class="nav-links">
             @auth
               <a class="nav-link active" href="/update" aria-current="page"><h6>Alterar Dados</h6></a>
+              @if ( auth()->user()->is_sec )
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="triggercurso" data-bs-toggle="dropdown" aria-haspopup="true" 
+                  aria-expanded="false"><h6>Cursos</h6></button>
+                  <div class="dropdown-menu" aria-labelledby="triggercurso">
+                    <a class="dropdown-item" href="/docente/cursos/">Gerenciamento dos cursos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/docente/cursos/create">Registrar novo curso</a>
+                  </div>
+              </div>
               <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="triggercurso" data-bs-toggle="dropdown" aria-haspopup="true" 
-                aria-expanded="false"><h6>Cursos</h6></button>
-                <div class="dropdown-menu" aria-labelledby="triggercurso">
-                  <a class="dropdown-item" href="/docente/cursos/">Gerenciamento dos cursos</a>
+                <button class="btn btn-primary dropdown-toggle" type="button" id="triggerprofessor" data-bs-toggle="dropdown" aria-haspopup="true" 
+                aria-expanded="false"><h6>Professores</h6></button>
+                <div class="dropdown-menu" aria-labelledby="triggerprofessor">
+                  <a class="dropdown-item" href="/docente/professors/">Gerenciamento dos professores</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/docente/cursos/create">Registrar novo curso</a>
+                  <a class="dropdown-item" href="/docente/professors/register">Registrar novo professor</a>
                 </div>
             </div>
             <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="triggerprofessor" data-bs-toggle="dropdown" aria-haspopup="true" 
-              aria-expanded="false"><h6>Professores</h6></button>
-              <div class="dropdown-menu" aria-labelledby="triggerprofessor">
-                <a class="dropdown-item" href="/docente/professors/">Gerenciamento dos professores</a>
+              <button class="btn btn-primary dropdown-toggle" type="button" id="triggeraluno" data-bs-toggle="dropdown" aria-haspopup="true" 
+              aria-expanded="false"><h6>Alunos</h6></button>
+              <div class="dropdown-menu" aria-labelledby="triggeraluno">
+                <a class="dropdown-item" href="/docente/alunos/index">Gerenciamento dos alunos</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/docente/professors/register">Registrar novo professor</a>
+                <a class="dropdown-item" href="/docente/alunos/register">Registrar novo aluno</a>
               </div>
           </div>
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="triggeraluno" data-bs-toggle="dropdown" aria-haspopup="true" 
-            aria-expanded="false"><h6>Alunos</h6></button>
-            <div class="dropdown-menu" aria-labelledby="triggeraluno">
-              <a class="dropdown-item" href="/docente/alunos/index">Gerenciamento dos alunos</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/docente/alunos/register">Registrar novo aluno</a>
-            </div>
-        </div>
+            @endif
               <form action="/logout" method="post">
                 @csrf
-                  <button class="btn btn-primary type="submit"><h6>Logout</h6></button>
+                  <button class="btn btn-primary" type="submit"><h6>Logout</h6></button>
               </form>
             @else
               <a class="nav-link active" href="/register" aria-current="page"><h6>Register</h6></a>

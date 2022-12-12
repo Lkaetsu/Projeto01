@@ -24,7 +24,7 @@ class DocenteCursoController extends Controller
             'desc' => 'required',
             'num_max' => 'required|numeric',
             'num_min' => 'required|numeric',
-            'professor_id' => 'nullable|exists:professors,id'
+            'professor_id' => 'nullable|exists:users,id'
         ]);
 
         Curso::create($attributes);
@@ -43,7 +43,7 @@ class DocenteCursoController extends Controller
             'desc' => 'required',
             'num_max' => 'required|numeric',
             'num_min' => 'required|numeric',
-            'professor_id' => 'nullable|exists:professors,id'
+            'professor_id' => 'nullable|exists:users,id'
         ]);
 
         $curso->update($attributes);

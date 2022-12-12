@@ -11,7 +11,7 @@ class DocenteAlunoController extends Controller
 {
     public function index(){
         return view('docente.alunos.index',[
-            'users' => User::paginate(30),
+            'users' => User::paginate(30)->where('is_prof',false)->where('is_sec',false)->where('is_adm',false),
             'cursos' => Curso::all(),
             'curso_users' => CursoUser::all()
         ]);
@@ -64,12 +64,15 @@ class DocenteAlunoController extends Controller
     }
 
     public function assign(User $user){
-        return view('docente.alunos.assign',['user'=>$user]);
+        return view('docente.alunos.assign',[
+            'user'=>$user,
+            'cursos'=>Curso::all(),
+        ]);
     }
 
     public function storeassign(User $user){
         $cursos_id = request()->validate([
-            'curso_id'=>'required|numeric|unique:curso_users,curso_id',
+            'curso_id'=>'required|numeric',
         ]);
         foreach($cursos_id as $curso_id)
             $cursouser = CursoUser::create([
@@ -77,6 +80,6 @@ class DocenteAlunoController extends Controller
                 'curso_id'=>$curso_id,
             ]);
 
-        return back()->with('sucesso','Curso atribuído ao aluno registrado.');
+        return back()->with('sucesso','Curso atribuído ao aluno.');
     }
 }

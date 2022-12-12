@@ -27,6 +27,9 @@ class UserController extends Controller
             if(CursoUser::where('curso_id','=',$curso_id)->count()>=$curso->num_min){
                 Curso::where('id','=',$curso_id)->where('min_not_ach','=',false)->update(['min_not_ach'=>true]);
             }
+            if(CursoUser::where('curso_id','=',$curso_id)->count()<=$curso->num_min){
+                Curso::where('id','=',$curso_id)->where('min_not_ach','=',true)->update(['min_not_ach'=>false]);
+            }
             if(CursoUser::where('curso_id','=',$curso_id)->count()==$curso->num_max){
                 Curso::where('id','=',$curso_id)->where('closed','=',false)->update(['closed'=>true]);
             }

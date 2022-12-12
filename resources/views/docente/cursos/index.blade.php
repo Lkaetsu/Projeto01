@@ -11,6 +11,9 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Professor</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Média Geral</th>
+                        <th scope="col">Aprovados</th>
+                        <th scope="col">Reprovados</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +31,18 @@
                             <td>Matrículas Encerradas</td>
                             @else
                                 <td>Matrículas Abertas - Curso acontecerá!</td>
+                            @endif
+                            @php
+                            $aprovados=App\Models\CursoUser::where('curso_id','=',$curso->id)->where('nota','>',5)->count();
+                            $media=App\Models\CursoUser::where('curso_id','=',$curso->id)->sum('nota');
+                            $count=App\Models\CursoUser::where('curso_id','=',$curso->id)->count();
+                            @endphp
+                            @if($count!=0)
+                            <td>{{ $media/$count }}</td>
+                            <td>{{ $aprovados }} - {{ $aprovados / $count * 100 }}%</td>
+                            <td>{{ $count-$aprovados }} - {{ ($count-$aprovados) / $count * 100 }}%</td>
+                            @else
+                            <td>Curso não tem alunos.</td>
                             @endif
                             <td><a class="btn btn-secondary" href="/docente/cursos/{{ $curso->id }}/edit">Editar</a></td>
                             <form action="/docente/cursos/{{ $curso->id }}" method="post">
